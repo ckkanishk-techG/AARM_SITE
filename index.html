@@ -249,17 +249,36 @@
   <section class="section impact" id="impact">
     <div class="impact__sunrise" aria-hidden="true">
       <svg class="scene-svg" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice">
-        <g fill="#E9E4D2">
+        <defs>
+          <linearGradient id="sunriseSky" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#F0A868"/>
+            <stop offset="42%" stop-color="#F3C99A"/>
+            <stop offset="100%" stop-color="#E9E4D2"/>
+          </linearGradient>
+          <radialGradient id="sunGlow" cx="50%" cy="100%" r="70%">
+            <stop offset="0%" stop-color="#F28C28" stop-opacity="0.85"/>
+            <stop offset="45%" stop-color="#F28C28" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#F28C28" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="sunDisc" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FBE2B3"/>
+            <stop offset="100%" stop-color="#F2A65A"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="1440" height="320" fill="url(#sunriseSky)"/>
+        <circle cx="720" cy="300" r="280" fill="url(#sunGlow)"/>
+        <circle cx="720" cy="292" r="72" fill="url(#sunDisc)"/>
+        <g fill="#3B4A3F" opacity="0.9">
           <path d="M0 320V240 L60 205 L120 240 L120 320Z"/>
           <path d="M100 320V215 L170 175 L240 215 L240 320Z"/>
           <path d="M980 320V210 L1050 170 L1120 210 L1120 320Z"/>
           <path d="M1080 320V240 L1140 210 L1200 240 L1200 320Z"/>
         </g>
         <!-- elephant walking away into the forest -->
-        <g fill="#C9BFA0">
+        <g fill="#3B4A3F">
           <path d="M900 320 C 892 292 903 270 928 266 C 926 255 939 244 956 248 C 972 240 995 248 1001 266 C 1017 270 1024 288 1017 306 L1015 320 L1006 320 L1006 306 L1000 310 L1000 320 L991 320 L991 307 C 979 313 957 314 942 309 L942 320 L933 320 L933 304 C 922 300 913 310 913 320 Z"/>
         </g>
-        <g fill="#EFE9D6">
+        <g fill="#2A3630">
           <path d="M0 320V260 L40 230 L90 260 L90 320Z"/>
           <path d="M300 320V265 L350 235 L400 265 L400 320Z"/>
           <path d="M700 320V262 L745 232 L790 262 L790 320Z"/>

@@ -5,6 +5,7 @@
   --c-transition: #3B4A3F;
   --c-dawn-1: #E9E4D2;
   --c-dawn-2: #F6F3EA;
+  --c-sunrise-glow: #EDBC86; /* warm flash where night meets morning, a tint of the accent */
 
   --c-text-dark: #EDEBE3;   /* text on dark backgrounds */
   --c-text-light: #14201B;  /* text on light backgrounds */
@@ -37,7 +38,8 @@ body {
     to bottom,
     var(--c-night-1) 0%,
     var(--c-night-2) 30%,
-    var(--c-transition) 65%,
+    var(--c-transition) 62%,
+    var(--c-sunrise-glow) 76%,
     var(--c-dawn-1) 85%,
     var(--c-dawn-2) 100%
   );

@@ -3,29 +3,34 @@
 // section's intended colour — so text always sits on the right background,
 // no matter how tall a section renders at a given viewport width.
 function updateDuskToDawnGradient() {
+  // 'top' anchors a stop to a section's leading edge (used for the sunrise
+  // flash, so it lands right at the horizon illustration); 'mid' anchors to
+  // its vertical centre (used for a section's own resting colour).
   const sectionColors = [
-    ['hero', '--c-night-1'],
-    ['problem', '--c-night-2'],
-    ['how', '--c-night-1'],
-    ['spectrum', '--c-night-2'],
-    ['technology', '--c-transition'],
-    ['impact', '--c-dawn-1'],
-    ['team', '--c-dawn-2'],
-    ['contact', '--c-dawn-2'],
-    ['footer', '--c-dawn-2'],
+    ['hero', '--c-night-1', 'mid'],
+    ['problem', '--c-night-2', 'mid'],
+    ['how', '--c-night-1', 'mid'],
+    ['spectrum', '--c-night-2', 'mid'],
+    ['technology', '--c-transition', 'mid'],
+    ['impact', '--c-sunrise-glow', 'top'],
+    ['impact', '--c-dawn-1', 'mid'],
+    ['team', '--c-dawn-2', 'mid'],
+    ['contact', '--c-dawn-2', 'mid'],
+    ['footer', '--c-dawn-2', 'mid'],
   ];
   const rootStyles = getComputedStyle(document.documentElement);
   const totalHeight = document.documentElement.scrollHeight;
   const scrollY = window.scrollY || window.pageYOffset;
 
-  const stops = sectionColors.map(([id, varName]) => {
+  const stops = sectionColors.map(([id, varName, anchor]) => {
     const el = document.getElementById(id);
     if (!el) return null;
     const rect = el.getBoundingClientRect();
     const top = rect.top + scrollY;
-    const midPct = ((top + el.offsetHeight / 2) / totalHeight) * 100;
+    const anchorPos = anchor === 'top' ? top : top + el.offsetHeight / 2;
+    const pct = (anchorPos / totalHeight) * 100;
     const color = rootStyles.getPropertyValue(varName).trim();
-    return `${color} ${midPct.toFixed(2)}%`;
+    return `${color} ${pct.toFixed(2)}%`;
   }).filter(Boolean);
 
   if (stops.length) {
