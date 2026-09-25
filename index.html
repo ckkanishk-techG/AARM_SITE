@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AARM — Automated Animal Resisting Machine</title>
+<meta name="description" content="AARM detects animals near human settlements and turns them back using infrasound and ultrasound. No harm, no noise for people. A patent-filed project by Team Saffron.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#top" class="nav__brand">AARM</a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#how">How it works</a>
+      <a href="#technology">Technology</a>
+      <a href="#impact">Impact</a>
+      <a href="#team">Team</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav__right">
+      <span class="badge">Patent Filed</span>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ 1. HERO — DUSK ============ -->
+  <section class="section hero" id="hero">
+    <div class="hero__content">
+      <h1 class="hero__title">Keeping wildlife and villages safe — with sound you can't hear.</h1>
+      <p class="hero__sub">AARM detects animals near human settlements and turns them back using infrasound and ultrasound. No harm, no noise for people.</p>
+      <div class="hero__actions">
+        <a href="#how" class="btn btn--solid">See how it works</a>
+        <a href="#technology" class="btn btn--outline">Watch demo</a>
+      </div>
+    </div>
+    <div class="hero__scene" aria-hidden="true">
+      <svg class="scene-svg" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice">
+        <!-- far trees -->
+        <g fill="#16261F">
+          <path d="M0 420V300 L60 260 L120 300 L120 420Z"/>
+          <path d="M100 420V270 L170 220 L240 270 L240 420Z"/>
+          <path d="M980 420V260 L1050 210 L1120 260 L1120 420Z"/>
+          <path d="M1080 420V300 L1140 260 L1200 300 L1200 420Z"/>
+        </g>
+        <!-- elephant silhouette, partly hidden left -->
+        <g fill="#0B1310">
+          <path d="M40 420 C 30 380 45 350 80 345 C 78 330 95 315 118 320 C 140 310 170 320 178 345 C 200 350 210 375 200 400 L198 420 L186 420 L186 400 L178 405 L178 420 L166 420 L166 402 C 150 410 120 412 100 405 L100 420 L88 420 L88 398 C 74 392 62 405 62 420 Z"/>
+        </g>
+        <!-- village hut with warm window -->
+        <g>
+          <path d="M1240 420V330 L1300 290 L1360 330 V420Z" fill="#16261F"/>
+          <rect x="1260" y="350" width="80" height="70" fill="#0F1A17"/>
+          <rect x="1282" y="365" width="22" height="26" fill="#F28C28" class="hut-window"/>
+        </g>
+        <!-- ground line trees -->
+        <g fill="#0F1A17">
+          <path d="M0 420V340 L40 300 L90 340 L90 420Z"/>
+          <path d="M300 420V350 L350 310 L400 350 L400 420Z"/>
+          <path d="M500 420V360 L540 330 L580 360 L580 420Z"/>
+          <path d="M700 420V345 L745 305 L790 345 L790 420Z"/>
+          <path d="M850 420V370 L885 340 L920 370 L920 420Z"/>
+          <path d="M1150 420V355 L1195 315 L1240 355 L1240 420Z"/>
+          <path d="M1380 420V330 L1425 290 L1440 305 L1440 420Z"/>
+        </g>
+        <rect x="0" y="415" width="1440" height="5" fill="#0B1310"/>
+      </svg>
+    </div>
+    <p class="hero__credit mono">TEAM SAFFRON · CHINMAYA INTERNATIONAL RESIDENTIAL SCHOOL, TAMIL NADU</p>
+  </section>
+
+  <!-- ============ 2. THE PROBLEM — NIGHT ============ -->
+  <section class="section problem" id="problem">
+    <div class="container">
+      <p class="eyebrow mono">THE PROBLEM</p>
+      <h2 class="pull-quote">Every year, animals wander into farms and villages — and it ends badly for someone.</h2>
+      <div class="problem__copy">
+        <p>Human–wildlife conflict is a growing, quiet crisis at the edge of forests everywhere. Elephants raid crops. Leopards enter cattle sheds. People are hurt trying to protect their homes, and animals are hurt — or killed — in the confrontations that follow.</p>
+        <p>Fences get broken. Firecrackers and noise only startle animals for a moment, and often push them toward another village instead of back to the forest. None of it solves the actual problem: nobody sees the animal coming, and nobody has a way to turn it back gently, before things escalate.</p>
+        <p>AARM was built to close that gap — watching the perimeter continuously, and responding the instant something approaches, in a way that neither harms nor alarms.</p>
+      </div>
+      <div class="stat-row">
+        <div class="stat-block">
+          <span class="stat-value mono">[STAT 1]</span>
+          <span class="stat-caption mono">[SOURCE]</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-value mono">[STAT 2]</span>
+          <span class="stat-caption mono">[SOURCE]</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-value mono">[STAT 3]</span>
+          <span class="stat-caption mono">[SOURCE]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. HOW IT WORKS — DEEP NIGHT ============ -->
+  <section class="section how" id="how">
+    <div class="container">
+      <p class="eyebrow mono">HOW IT WORKS</p>
+      <h2 class="section-title">From first movement to safe morning.</h2>
+
+      <div class="timeline">
+        <div class="timeline__line" aria-hidden="true"></div>
+
+        <div class="step">
+          <div class="step__dot" aria-hidden="true"></div>
+          <span class="step__num mono">01</span>
+          <div class="step__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="6" y="16" width="26" height="18" rx="2"/>
+              <path d="M32 22 L42 17 V33 L32 27Z"/>
+              <circle cx="19" cy="25" r="6"/>
+            </svg>
+          </div>
+          <h3 class="step__title">Detect</h3>
+          <p class="step__desc">A camera watches the perimeter around the clock.</p>
+        </div>
+
+        <div class="step">
+          <div class="step__dot" aria-hidden="true"></div>
+          <span class="step__num mono">02</span>
+          <div class="step__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="8" y="10" width="32" height="24" rx="2"/>
+              <path d="M8 30 L18 20 L26 26 L34 16 L40 22"/>
+              <circle cx="24" cy="40" r="2" fill="currentColor" stroke="none"/>
+              <path d="M18 40h12"/>
+            </svg>
+          </div>
+          <h3 class="step__title">Identify</h3>
+          <p class="step__desc">AI image recognition running on a Raspberry Pi 4 identifies the animal's species.</p>
+        </div>
+
+        <div class="step">
+          <div class="step__dot" aria-hidden="true"></div>
+          <span class="step__num mono">03</span>
+          <div class="step__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="20" y="14" width="8" height="20" rx="2"/>
+              <path d="M14 20v8M8 16v16M34 20v8M40 16v16"/>
+            </svg>
+          </div>
+          <h3 class="step__title">Deter</h3>
+          <p class="step__desc">AARM emits infrasound and ultrasound to turn the animal away, silent to humans.</p>
+        </div>
+
+        <div class="step">
+          <div class="step__dot" aria-hidden="true"></div>
+          <span class="step__num mono">04</span>
+          <div class="step__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M24 6 C15 6 10 13 10 21 v8 l-4 6h36l-4-6v-8c0-8-5-15-14-15Z"/>
+              <path d="M19 39a5 5 0 0010 0"/>
+            </svg>
+          </div>
+          <h3 class="step__title">Alert</h3>
+          <p class="step__desc">IoT notifications warn people nearby in real time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. SILENT SPECTRUM — LATE NIGHT ============ -->
+  <section class="section spectrum" id="spectrum">
+    <div class="container">
+      <p class="eyebrow mono">THE SILENT SPECTRUM</p>
+      <h2 class="section-title">Working at the edges of sound.</h2>
+      <p class="spectrum__caption">People hear roughly 20 Hz to 20 kHz. AARM works just outside that window — frequencies most animals sense, and people never notice.</p>
+
+      <div class="spectrum-bar">
+        <div class="spectrum-zone spectrum-zone--infra">
+          <span class="zone-label mono">INFRASOUND<br>&lt; 20 Hz</span>
+        </div>
+        <div class="spectrum-zone spectrum-zone--human">
+          <span class="zone-label mono">HUMAN HEARING<br>20 Hz – 20 kHz</span>
+        </div>
+        <div class="spectrum-zone spectrum-zone--ultra">
+          <span class="zone-label mono">ULTRASOUND<br>&gt; 20 kHz</span>
+        </div>
+        <svg class="spectrum-wave" viewBox="0 0 1200 100" preserveAspectRatio="none">
+          <path d="M0,50 C60,10 120,90 180,50 C240,10 300,90 360,50 C400,30 420,70 440,50 C455,40 465,60 475,50 C485,42 490,58 495,50 C498,46 500,54 502,50 L1200,50" fill="none" stroke="#F28C28" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. TECHNOLOGY — PRE-DAWN ============ -->
+  <section class="section technology" id="technology">
+    <div class="container tech__grid">
+      <div class="tech__art" aria-hidden="true">
+        <svg viewBox="0 0 360 480" fill="none" stroke="#14201B" stroke-width="1.4">
+          <line x1="180" y1="60" x2="180" y2="440"/>
+          <rect x="150" y="440" width="60" height="14" rx="2"/>
+          <rect x="130" y="60" width="100" height="70" rx="6"/>
+          <circle cx="180" cy="95" r="18"/>
+          <rect x="150" y="140" width="60" height="34" rx="4"/>
+          <path d="M160 150h40M160 158h40M160 166h20"/>
+          <rect x="120" y="190" width="120" height="26" rx="4"/>
+          <rect x="200" y="60" width="26" height="10"/>
+          <line x1="226" y1="65" x2="270" y2="65"/>
+          <circle cx="272" cy="65" r="3"/>
+          <text x="278" y="69" font-family="JetBrains Mono, monospace" font-size="11" fill="#14201B" stroke="none">VISION</text>
+          <line x1="210" y1="95" x2="270" y2="95"/>
+          <circle cx="272" cy="95" r="3"/>
+          <text x="278" y="99" font-family="JetBrains Mono, monospace" font-size="11" fill="#14201B" stroke="none">BRAIN</text>
+          <line x1="210" y1="157" x2="270" y2="157"/>
+          <circle cx="272" cy="157" r="3"/>
+          <text x="278" y="161" font-family="JetBrains Mono, monospace" font-size="11" fill="#14201B" stroke="none">DETERRENT</text>
+          <line x1="150" y1="203" x2="90" y2="203"/>
+          <circle cx="88" cy="203" r="3"/>
+          <text x="18" y="207" font-family="JetBrains Mono, monospace" font-size="11" fill="#14201B" stroke="none">CONNECTIVITY</text>
+          <line x1="180" y1="440" x2="180" y2="460"/>
+          <line x1="140" y1="460" x2="220" y2="460"/>
+          <line x1="150" y1="460" x2="150" y2="475"/>
+          <line x1="150" y1="475" x2="90" y2="475"/>
+          <circle cx="88" cy="475" r="3"/>
+          <text x="18" y="479" font-family="JetBrains Mono, monospace" font-size="11" fill="#14201B" stroke="none">POWER</text>
+        </svg>
+      </div>
+      <div class="tech__specs">
+        <p class="eyebrow mono">TECHNOLOGY</p>
+        <h2 class="section-title">Built to run unattended, off-grid.</h2>
+        <dl class="spec-list">
+          <div class="spec-row"><dt class="mono">POWER</dt><dd>Solar, runs off-grid</dd></div>
+          <div class="spec-row"><dt class="mono">BRAIN</dt><dd>Raspberry Pi 4</dd></div>
+          <div class="spec-row"><dt class="mono">VISION</dt><dd>Camera + AI species recognition</dd></div>
+          <div class="spec-row"><dt class="mono">DETERRENT</dt><dd>Infrasound &amp; ultrasound transducers</dd></div>
+          <div class="spec-row"><dt class="mono">CONNECTIVITY</dt><dd>IoT alerts</dd></div>
+          <div class="spec-row"><dt class="mono">STATUS</dt><dd>Patent filed</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. IMPACT — DAWN ============ -->
+  <section class="section impact" id="impact">
+    <div class="impact__sunrise" aria-hidden="true">
+      <svg class="scene-svg" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice">
+        <g fill="#E9E4D2">
+          <path d="M0 320V240 L60 205 L120 240 L120 320Z"/>
+          <path d="M100 320V215 L170 175 L240 215 L240 320Z"/>
+          <path d="M980 320V210 L1050 170 L1120 210 L1120 320Z"/>
+          <path d="M1080 320V240 L1140 210 L1200 240 L1200 320Z"/>
+        </g>
+        <!-- elephant walking away into the forest -->
+        <g fill="#C9BFA0">
+          <path d="M900 320 C 892 292 903 270 928 266 C 926 255 939 244 956 248 C 972 240 995 248 1001 266 C 1017 270 1024 288 1017 306 L1015 320 L1006 320 L1006 306 L1000 310 L1000 320 L991 320 L991 307 C 979 313 957 314 942 309 L942 320 L933 320 L933 304 C 922 300 913 310 913 320 Z"/>
+        </g>
+        <g fill="#EFE9D6">
+          <path d="M0 320V260 L40 230 L90 260 L90 320Z"/>
+          <path d="M300 320V265 L350 235 L400 265 L400 320Z"/>
+          <path d="M700 320V262 L745 232 L790 262 L790 320Z"/>
+          <path d="M1150 320V268 L1195 238 L1240 268 L1240 320Z"/>
+        </g>
+      </svg>
+    </div>
+    <div class="container">
+      <p class="eyebrow mono">IMPACT</p>
+      <h2 class="section-title">A safer morning for everyone.</h2>
+      <div class="impact__cols">
+        <div class="impact__col">
+          <span class="impact__num mono">01</span>
+          <h3>For villages</h3>
+          <p>Fewer dangerous encounters at the perimeter, and earlier warning when something approaches.</p>
+        </div>
+        <div class="impact__col">
+          <span class="impact__num mono">02</span>
+          <h3>For wildlife</h3>
+          <p>Non-lethal, no injury — animals are guided back to the forest, not harmed or trapped.</p>
+        </div>
+        <div class="impact__col">
+          <span class="impact__num mono">03</span>
+          <h3>For farmers</h3>
+          <p>Crops protected without needing to stay up watching the fields through the night.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. TEAM ============ -->
+  <section class="section team" id="team">
+    <div class="container">
+      <p class="eyebrow mono">TEAM</p>
+      <h2 class="section-title">Team Saffron</h2>
+      <div class="team__grid">
+        <div class="member">
+          <div class="member__photo" aria-hidden="true"></div>
+          <p class="member__name">[NAME]</p>
+          <p class="member__role mono">[ROLE]</p>
+        </div>
+        <div class="member">
+          <div class="member__photo" aria-hidden="true"></div>
+          <p class="member__name">[NAME]</p>
+          <p class="member__role mono">[ROLE]</p>
+        </div>
+        <div class="member">
+          <div class="member__photo" aria-hidden="true"></div>
+          <p class="member__name">[NAME]</p>
+          <p class="member__role mono">[ROLE]</p>
+        </div>
+        <div class="member">
+          <div class="member__photo" aria-hidden="true"></div>
+          <p class="member__name">[NAME]</p>
+          <p class="member__role mono">[ROLE]</p>
+        </div>
+      </div>
+      <p class="mentor-line mono">MENTORED BY [MENTOR NAME] · CHINMAYA INTERNATIONAL RESIDENTIAL SCHOOL, TAMIL NADU</p>
+    </div>
+  </section>
+
+  <!-- ============ 8. CONTACT ============ -->
+  <section class="section contact" id="contact">
+    <div class="container contact__grid">
+      <div class="contact__form-wrap">
+        <p class="eyebrow mono">CONTACT</p>
+        <h2 class="section-title">Want to pilot AARM or support the project?</h2>
+        <form class="form" id="contactForm">
+          <div class="field">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" required>
+          </div>
+          <div class="field">
+            <label for="cf-org">Organisation</label>
+            <input type="text" id="cf-org" name="organisation">
+          </div>
+          <div class="field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--solid">Send</button>
+          <p class="form__note mono" id="formNote" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <div class="contact__info">
+        <div class="info-row">
+          <span class="info-label mono">EMAIL</span>
+          <span class="info-value">[EMAIL ADDRESS]</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label mono">PHONE</span>
+          <span class="info-value">[PHONE]</span>
+        </div>
+        <div class="qr-placeholder">
+          <span class="mono">[QR CODE]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="mono">© <span id="year"></span> Team Saffron · AARM</p>
+    <p class="mono">Patent filed</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
