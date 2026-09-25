@@ -29,8 +29,18 @@ body {
   font-size: 18px;
   line-height: 1.6;
   color: var(--c-text-dark);
-  background: var(--c-night-1);
   overflow-x: hidden;
+  /* Fallback for no-JS: a rough night -> dawn gradient. script.js replaces
+     this with one whose stops match each section's real position, so text
+     always lands on the colour it was designed for. */
+  background: linear-gradient(
+    to bottom,
+    var(--c-night-1) 0%,
+    var(--c-night-2) 30%,
+    var(--c-transition) 65%,
+    var(--c-dawn-1) 85%,
+    var(--c-dawn-2) 100%
+  );
 }
 h1, h2, h3 { font-family: var(--font-display); font-weight: 700; margin: 0; }
 p { margin: 0; }
@@ -164,7 +174,6 @@ textarea:focus-visible {
 /* ============ HERO ============ */
 .hero {
   min-height: 100vh;
-  background: var(--c-night-1);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -236,7 +245,6 @@ textarea:focus-visible {
 
 /* ============ PROBLEM ============ */
 .problem {
-  background: var(--c-night-2);
   padding: 140px 0;
 }
 .pull-quote {
@@ -272,7 +280,6 @@ textarea:focus-visible {
 
 /* ============ HOW IT WORKS ============ */
 .how {
-  background: var(--c-night-1);
   padding: 140px 0 160px;
 }
 .timeline {
@@ -322,7 +329,6 @@ textarea:focus-visible {
 
 /* ============ SPECTRUM ============ */
 .spectrum {
-  background: var(--c-night-2);
   padding: 140px 0;
 }
 .spectrum__caption {
@@ -371,7 +377,6 @@ textarea:focus-visible {
 
 /* ============ TECHNOLOGY ============ */
 .technology {
-  background: var(--c-transition);
   padding: 140px 0;
   color: var(--c-text-light);
 }
@@ -402,7 +407,6 @@ textarea:focus-visible {
 
 /* ============ IMPACT ============ */
 .impact {
-  background: var(--c-dawn-1);
   color: var(--c-text-light);
   padding-top: 0;
   position: relative;
@@ -428,7 +432,6 @@ textarea:focus-visible {
 
 /* ============ TEAM ============ */
 .team {
-  background: var(--c-dawn-2);
   color: var(--c-text-light);
   padding: 140px 0;
 }
@@ -454,7 +457,6 @@ textarea:focus-visible {
 
 /* ============ CONTACT ============ */
 .contact {
-  background: var(--c-dawn-2);
   padding: 140px 0;
   color: var(--c-text-light);
   border-top: 1px solid rgba(20,32,27,0.1);
@@ -508,7 +510,6 @@ textarea:focus-visible {
 
 /* ============ FOOTER ============ */
 .footer {
-  background: var(--c-dawn-2);
   border-top: 1px solid rgba(20,32,27,0.12);
   padding: 28px 0;
   color: var(--c-sub-light);
