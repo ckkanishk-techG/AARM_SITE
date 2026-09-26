@@ -58,6 +58,23 @@ window.addEventListener('wheel', (e) => {
   window.scrollBy({ left: e.deltaY, behavior: 'auto' });
 }, { passive: false });
 
+// Walking elephant mascot: its horizontal position tracks how far through
+// the page you've scrolled, so it treks from one side of the screen to the
+// other as you move from the night side of the site to the dawn side. The
+// leg/body walk-cycle animation is separate (pure CSS, always looping).
+const scrollElephant = document.getElementById('scrollElephant');
+function updateElephantPosition() {
+  if (!scrollElephant) return;
+  const maxScroll = document.documentElement.scrollWidth - window.innerWidth;
+  const scrollX = window.scrollX || window.pageXOffset;
+  const progress = maxScroll > 0 ? Math.min(1, Math.max(0, scrollX / maxScroll)) : 0;
+  const travel = Math.max(0, window.innerWidth - scrollElephant.offsetWidth - 28);
+  scrollElephant.style.transform = `translateX(${14 + progress * travel}px)`;
+}
+window.addEventListener('scroll', updateElephantPosition);
+window.addEventListener('resize', updateElephantPosition);
+updateElephantPosition();
+
 // Nav background once scrolled off the first panel
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {

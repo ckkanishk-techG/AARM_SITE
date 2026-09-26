@@ -27,15 +27,22 @@ html, body { height: 100%; margin: 0; }
 html {
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
+  /* No scroll-snap: snapping forces a hard jump to the next full panel on
+     any scroll release, which reads as slide-by-slide (PPT-like) rather
+     than continuous scrolling. Plain overflow scrolling stays fluid and
+     tracks wheel/trackpad input 1:1. */
   /* Without its own background, browsers propagate body's background to
      paint the canvas — and then size gradient percentages to the viewport
      instead of body's real (much wider) box, making the gradient repeat
      every viewport-width instead of spanning the whole scroll track. An
      explicit background here stops that propagation. */
   background: var(--c-night-1);
+  /* Hide the scrollbar chrome; wheel/trackpad scrolling and the nav still
+     work identically, this only removes the visible bar. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+html::-webkit-scrollbar { display: none; }
 body {
   display: flex;
   flex-direction: row;
@@ -87,9 +94,11 @@ ul { margin: 0; padding: 0; }
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
-  scroll-snap-align: start;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.section::-webkit-scrollbar { display: none; }
 
 /* ============ FOCUS / A11Y ============ */
 a:focus-visible,
@@ -564,4 +573,48 @@ textarea:focus-visible {
 @media (min-width: 641px) and (max-width: 1024px) {
   .hero__title { font-size: 72px; }
   .tech__grid { grid-template-columns: 1fr; }
+}
+
+/* ============ SCROLL MASCOT ============ */
+/* A little elephant that walks along the bottom of the screen, its
+   horizontal position tied to scroll progress (JS sets its transform), so
+   it treks from the night side of the site to the dawn side as you go. */
+.scroll-elephant {
+  position: fixed;
+  bottom: 16px;
+  left: 0;
+  width: 64px;
+  height: auto;
+  color: var(--c-accent);
+  z-index: 60;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transform: translateX(14px);
+}
+.scroll-elephant svg { display: block; width: 100%; height: auto; overflow: visible; }
+.ele-leg-front,
+.ele-leg-back {
+  transform-box: fill-box;
+  transform-origin: center top;
+  animation: eleWalk 0.6s ease-in-out infinite;
+}
+.ele-leg-back { animation-delay: 0.3s; }
+.ele-body {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: eleBob 0.6s ease-in-out infinite;
+}
+@keyframes eleWalk {
+  0%, 100% { transform: rotate(-16deg); }
+  50% { transform: rotate(16deg); }
+}
+@keyframes eleBob {
+  0%, 50%, 100% { transform: translateY(0); }
+  25%, 75% { transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ele-leg-front, .ele-leg-back, .ele-body { animation: none; }
+}
+@media (max-width: 640px) {
+  .scroll-elephant { width: 44px; bottom: 10px; }
 }
