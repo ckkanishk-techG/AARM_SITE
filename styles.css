@@ -23,19 +23,34 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html, body { height: 100%; margin: 0; }
+html {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  /* Without its own background, browsers propagate body's background to
+     paint the canvas — and then size gradient percentages to the viewport
+     instead of body's real (much wider) box, making the gradient repeat
+     every viewport-width instead of spanning the whole scroll track. An
+     explicit background here stops that propagation. */
+  background: var(--c-night-1);
+}
 body {
-  margin: 0;
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+  min-height: 100vh;
   font-family: var(--font-body);
   font-size: 18px;
   line-height: 1.6;
   color: var(--c-text-dark);
-  overflow-x: hidden;
-  /* Fallback for no-JS: a rough night -> dawn gradient. script.js replaces
-     this with one whose stops match each section's real position, so text
-     always lands on the colour it was designed for. */
+  /* Fallback for no-JS: a rough night -> dawn gradient, left to right since
+     the page now scrolls sideways. script.js replaces this with one whose
+     stops match each panel's real position, so text always lands on the
+     colour it was designed for. */
   background: linear-gradient(
-    to bottom,
+    to right,
     var(--c-night-1) 0%,
     var(--c-night-2) 30%,
     var(--c-transition) 62%,
@@ -44,6 +59,9 @@ body {
     var(--c-dawn-2) 100%
   );
 }
+/* Lets <main>'s section children act as direct flex items of body, without
+   main itself adding a box to the horizontal row. */
+main { display: contents; }
 h1, h2, h3 { font-family: var(--font-display); font-weight: 700; margin: 0; }
 p { margin: 0; }
 a { color: inherit; text-decoration: none; }
@@ -62,7 +80,16 @@ ul { margin: 0; padding: 0; }
   padding: 0 40px;
 }
 
-.section { position: relative; width: 100%; }
+.section {
+  position: relative;
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-align: start;
+  -webkit-overflow-scrolling: touch;
+}
 
 /* ============ FOCUS / A11Y ============ */
 a:focus-visible,
@@ -190,9 +217,10 @@ textarea:focus-visible {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: safe center;
   padding-top: 120px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .hero__content {
   max-width: 900px;
@@ -444,93 +472,33 @@ textarea:focus-visible {
 .impact__col h3 { font-size: 26px; color: var(--c-text-light); }
 .impact__col p { color: var(--c-sub-light); font-size: 16px; }
 
-/* ============ TEAM ============ */
-.team {
-  color: var(--c-text-light);
-  padding: 140px 0;
-}
-.team .eyebrow { color: #b8621a; }
-.team .section-title { color: var(--c-text-light); }
-.team__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-  margin-bottom: 56px;
-}
-.member { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
-.member__photo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: #DCD6C0;
-  border: 1px solid rgba(20,32,27,0.15);
-}
-.member__name { font-weight: 700; font-size: 17px; }
-.member__role { font-size: 11px; color: var(--c-sub-light); }
-.mentor-line { font-size: 12px; color: var(--c-sub-light); text-align: center; }
-
-/* ============ CONTACT ============ */
-.contact {
-  padding: 140px 0;
-  color: var(--c-text-light);
-  border-top: 1px solid rgba(20,32,27,0.1);
-}
-.contact .eyebrow { color: #b8621a; }
-.contact .section-title { color: var(--c-text-light); margin-bottom: 40px; }
-.contact__grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 80px;
-}
-.form { display: flex; flex-direction: column; gap: 22px; }
-.field { display: flex; flex-direction: column; gap: 8px; }
-.field label {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--c-sub-light);
-}
-.field input, .field textarea {
-  font-family: var(--font-body);
-  font-size: 16px;
-  padding: 14px 16px;
-  border: 1px solid rgba(20,32,27,0.25);
-  border-radius: 2px;
-  background: #FFFFFF;
-  color: var(--c-text-light);
-  resize: vertical;
-}
-.field input:focus, .field textarea:focus {
-  border-color: var(--c-accent);
-}
-.form .btn--solid { align-self: flex-start; border: 1px solid var(--c-accent); }
-.form__note { font-size: 12px; color: var(--c-accent); min-height: 16px; }
-.contact__info { display: flex; flex-direction: column; gap: 28px; padding-top: 8px; }
-.info-row { display: flex; flex-direction: column; gap: 6px; }
-.info-label { font-size: 11px; color: var(--c-sub-light); }
-.info-value { font-size: 18px; }
-.qr-placeholder {
-  width: 140px;
-  height: 140px;
-  border: 1px dashed rgba(20,32,27,0.35);
+/* ============ CLOSING MARK ============ */
+.closing {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--c-sub-light);
-  font-size: 11px;
-  border-radius: 2px;
+  align-items: safe center;
+  justify-content: safe center;
+}
+.closing__inner {
+  padding: 0 40px;
+}
+.closing__logo {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
 }
 
 /* ============ FOOTER ============ */
 .footer {
-  border-top: 1px solid rgba(20,32,27,0.12);
-  padding: 28px 0;
+  border-left: 1px solid rgba(20,32,27,0.12);
   color: var(--c-sub-light);
+  display: flex;
+  align-items: safe center;
+  justify-content: safe center;
 }
 .footer__inner {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
   font-size: 11px;
 }
 
@@ -566,7 +534,8 @@ textarea:focus-visible {
   .hero__scene { height: 220px; }
   .hero__credit { font-size: 10px; padding: 0 20px 24px; }
 
-  .problem, .how, .spectrum, .technology, .team, .contact { padding: 90px 0; }
+  .problem, .how, .spectrum, .technology { padding: 90px 0; }
+  .closing__logo { max-width: 260px; }
   .pull-quote { font-size: 32px; margin-bottom: 36px; }
   .section-title { font-size: 32px; margin-bottom: 32px; }
   .problem__copy { margin-bottom: 48px; }
@@ -590,16 +559,9 @@ textarea:focus-visible {
   .spec-row { grid-template-columns: 110px 1fr; gap: 14px; }
 
   .impact__cols { grid-template-columns: 1fr; gap: 36px; }
-
-  .team__grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
-
-  .contact__grid { grid-template-columns: 1fr; gap: 48px; }
-
-  .footer__inner { flex-direction: column; gap: 8px; }
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
   .hero__title { font-size: 72px; }
-  .team__grid { grid-template-columns: repeat(2, 1fr); }
   .tech__grid { grid-template-columns: 1fr; }
 }

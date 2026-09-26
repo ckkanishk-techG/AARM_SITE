@@ -1,40 +1,40 @@
 // Dusk-to-dawn background: build one continuous gradient across the whole
-// page, with a stop at the vertical centre of each section holding that
-// section's intended colour — so text always sits on the right background,
-// no matter how tall a section renders at a given viewport width.
+// page, with a stop at the horizontal centre of each panel holding that
+// panel's intended colour — so text always sits on the right background,
+// no matter how wide a panel renders at a given viewport size. The page
+// scrolls sideways, so the gradient runs left to right.
 function updateDuskToDawnGradient() {
-  // 'top' anchors a stop to a section's leading edge (used for the sunrise
+  // 'leading' anchors a stop to a panel's left edge (used for the sunrise
   // flash, so it lands right at the horizon illustration); 'mid' anchors to
-  // its vertical centre (used for a section's own resting colour).
+  // its horizontal centre (used for a panel's own resting colour).
   const sectionColors = [
     ['hero', '--c-night-1', 'mid'],
     ['problem', '--c-night-2', 'mid'],
     ['how', '--c-night-1', 'mid'],
     ['spectrum', '--c-night-2', 'mid'],
     ['technology', '--c-transition', 'mid'],
-    ['impact', '--c-sunrise-glow', 'top'],
+    ['impact', '--c-sunrise-glow', 'leading'],
     ['impact', '--c-dawn-1', 'mid'],
     ['team', '--c-dawn-2', 'mid'],
-    ['contact', '--c-dawn-2', 'mid'],
     ['footer', '--c-dawn-2', 'mid'],
   ];
   const rootStyles = getComputedStyle(document.documentElement);
-  const totalHeight = document.documentElement.scrollHeight;
-  const scrollY = window.scrollY || window.pageYOffset;
+  const totalWidth = document.documentElement.scrollWidth;
+  const scrollX = window.scrollX || window.pageXOffset;
 
   const stops = sectionColors.map(([id, varName, anchor]) => {
     const el = document.getElementById(id);
     if (!el) return null;
     const rect = el.getBoundingClientRect();
-    const top = rect.top + scrollY;
-    const anchorPos = anchor === 'top' ? top : top + el.offsetHeight / 2;
-    const pct = (anchorPos / totalHeight) * 100;
+    const left = rect.left + scrollX;
+    const anchorPos = anchor === 'leading' ? left : left + el.offsetWidth / 2;
+    const pct = (anchorPos / totalWidth) * 100;
     const color = rootStyles.getPropertyValue(varName).trim();
     return `${color} ${pct.toFixed(2)}%`;
   }).filter(Boolean);
 
   if (stops.length) {
-    document.body.style.background = `linear-gradient(to bottom, ${stops.join(', ')})`;
+    document.body.style.background = `linear-gradient(to right, ${stops.join(', ')})`;
   }
 }
 
@@ -49,10 +49,19 @@ if (document.fonts && document.fonts.ready) {
 }
 updateDuskToDawnGradient();
 
-// Nav background on scroll
+// Turn vertical wheel/trackpad input into horizontal scrolling, since the
+// page's own scroll axis is now sideways (mice and trackpads report
+// vertical intent far more often than horizontal).
+window.addEventListener('wheel', (e) => {
+  if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return; // already horizontal input
+  e.preventDefault();
+  window.scrollBy({ left: e.deltaY, behavior: 'auto' });
+}, { passive: false });
+
+// Nav background once scrolled off the first panel
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
+  nav.classList.toggle('scrolled', (window.scrollX || window.pageXOffset) > 40);
 });
 
 // Mobile menu toggle
@@ -62,8 +71,17 @@ navToggle.addEventListener('click', () => {
   const isOpen = navLinks.classList.toggle('open');
   navToggle.setAttribute('aria-expanded', String(isOpen));
 });
-navLinks.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
+
+// Every in-page anchor (nav brand, nav links, hero buttons) scrolls
+// horizontally to its target panel instead of relying on the browser's
+// default vertical anchor jump.
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    }
     navLinks.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
   });
@@ -71,12 +89,3 @@ navLinks.querySelectorAll('a').forEach((link) => {
 
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
-
-// Contact form (no backend wired up yet — placeholder confirmation only)
-const contactForm = document.getElementById('contactForm');
-const formNote = document.getElementById('formNote');
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  formNote.textContent = 'Thanks — this form is not yet connected to an inbox. Please use the email above for now.';
-  contactForm.reset();
-});
