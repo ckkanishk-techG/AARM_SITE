@@ -20,6 +20,7 @@
   --font-mono: 'JetBrains Mono', monospace;
 
   --container-w: 1200px;
+  --nav-clear: 88px; /* minimum top clearance so content never sits under the fixed nav (measured ~79px desktop) */
 }
 
 * { box-sizing: border-box; }
@@ -92,13 +93,11 @@ ul { margin: 0; padding: 0; }
   flex: 0 0 100vw;
   width: 100vw;
   height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  /* No vertical scroll anywhere, including inside a panel: every section's
+     content is sized with vh-aware clamp()s (below) so it fits the screen
+     height on its own. Horizontal page scroll is the only scroll axis. */
+  overflow: hidden;
 }
-.section::-webkit-scrollbar { display: none; }
 
 /* ============ FOCUS / A11Y ============ */
 a:focus-visible,
@@ -223,13 +222,11 @@ textarea:focus-visible {
 
 /* ============ HERO ============ */
 .hero {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: safe center;
-  padding-top: 120px;
-  overflow-x: hidden;
-  overflow-y: auto;
+  justify-content: center;
+  padding-top: var(--nav-clear);
 }
 .hero__content {
   max-width: 900px;
@@ -240,16 +237,16 @@ textarea:focus-visible {
   z-index: 2;
 }
 .hero__title {
-  font-size: 120px;
-  line-height: 1.02;
+  font-size: clamp(30px, min(9vh, 6.2vw), 120px);
+  line-height: 1.05;
   letter-spacing: -0.02em;
-  margin-bottom: 32px;
+  margin-bottom: clamp(12px, 3vh, 32px);
 }
 .hero__sub {
-  font-size: 20px;
+  font-size: clamp(13px, 2.2vh, 20px);
   color: var(--c-sub-dark);
   max-width: 620px;
-  margin: 0 auto 40px;
+  margin: 0 auto clamp(14px, 3vh, 40px);
 }
 .hero__actions {
   display: flex;
@@ -260,8 +257,8 @@ textarea:focus-visible {
 .hero__scene {
   position: relative;
   width: 100%;
-  height: 420px;
-  margin-top: 40px;
+  height: clamp(70px, 18vh, 420px);
+  margin-top: clamp(10px, 3vh, 40px);
 }
 .scene-svg { width: 100%; height: 100%; display: block; }
 .hut-window { animation: flicker 3.5s ease-in-out infinite; }
@@ -275,9 +272,9 @@ textarea:focus-visible {
   position: relative;
   z-index: 2;
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--c-sub-dark);
-  padding-bottom: 32px;
+  padding: clamp(8px, 2vh, 32px) 20px 0;
   letter-spacing: 0.12em;
 }
 
@@ -285,60 +282,68 @@ textarea:focus-visible {
 .eyebrow {
   font-size: 13px;
   color: var(--c-accent);
-  margin-bottom: 20px;
+  margin-bottom: clamp(8px, 2vh, 20px);
 }
 .section-title {
-  font-size: 48px;
-  line-height: 1.1;
-  margin-bottom: 48px;
+  font-size: clamp(22px, min(5.2vh, 4vw), 48px);
+  line-height: 1.15;
+  margin-bottom: clamp(14px, 3vh, 48px);
   max-width: 800px;
 }
 
 /* ============ PROBLEM ============ */
 .problem {
-  padding: 140px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--nav-clear) 0 clamp(16px, 4vh, 48px);
 }
 .pull-quote {
-  font-size: 56px;
-  line-height: 1.15;
+  font-size: clamp(20px, min(5.6vh, 4.2vw), 56px);
+  line-height: 1.2;
   max-width: 900px;
-  margin-bottom: 56px;
+  margin-bottom: clamp(14px, 3vh, 56px);
 }
 .problem__copy {
   max-width: 720px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: clamp(8px, 1.6vh, 24px);
   color: var(--c-text-dark);
-  margin-bottom: 80px;
+  margin-bottom: clamp(16px, 3.5vh, 80px);
+  font-size: clamp(12px, 1.8vh, 18px);
+  line-height: 1.5;
 }
 .problem__copy p { color: var(--c-sub-dark); }
 .stat-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  gap: clamp(14px, 3vh, 40px);
   border-top: 1px solid rgba(142, 154, 144, 0.25);
-  padding-top: 48px;
+  padding-top: clamp(12px, 3vh, 48px);
 }
-.stat-block { display: flex; flex-direction: column; gap: 10px; }
+.stat-block { display: flex; flex-direction: column; gap: 6px; }
 .stat-value {
-  font-size: 40px;
+  font-size: clamp(18px, 4vh, 40px);
   color: var(--c-accent);
   font-weight: 600;
   letter-spacing: 0.02em;
 }
-.stat-caption { font-size: 11px; color: var(--c-sub-dark); }
+.stat-caption { font-size: 10px; color: var(--c-sub-dark); }
 
 /* ============ HOW IT WORKS ============ */
 .how {
-  padding: 140px 0 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--nav-clear) 0 clamp(16px, 4vh, 48px);
 }
 .timeline {
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-  padding-top: 40px;
+  gap: clamp(16px, 3vh, 40px);
+  padding-top: clamp(14px, 3vh, 40px);
 }
 .timeline__line {
   position: absolute;
@@ -348,7 +353,7 @@ textarea:focus-visible {
   height: 1px;
   background: linear-gradient(90deg, rgba(242,140,40,0.15), var(--c-accent) 15%, var(--c-accent) 85%, rgba(242,140,40,0.15));
 }
-.step { position: relative; padding-top: 40px; }
+.step { position: relative; padding-top: clamp(14px, 3vh, 40px); }
 .step__dot {
   position: absolute;
   top: 8px;
@@ -361,37 +366,41 @@ textarea:focus-visible {
 }
 .step__num {
   display: block;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--c-sub-dark);
-  margin-bottom: 20px;
+  margin-bottom: clamp(6px, 1.5vh, 20px);
 }
 .step__icon {
-  width: 48px;
-  height: 48px;
+  width: clamp(26px, 5vh, 48px);
+  height: clamp(26px, 5vh, 48px);
   color: var(--c-accent);
-  margin-bottom: 20px;
+  margin-bottom: clamp(6px, 1.5vh, 20px);
 }
 .step__icon svg { width: 100%; height: 100%; }
 .step__title {
-  font-size: 24px;
-  margin-bottom: 12px;
+  font-size: clamp(15px, 2.6vh, 24px);
+  margin-bottom: clamp(4px, 1vh, 12px);
 }
-.step__desc { color: var(--c-sub-dark); font-size: 16px; }
+.step__desc { color: var(--c-sub-dark); font-size: clamp(11px, 1.7vh, 16px); line-height: 1.4; }
 
 /* ============ SPECTRUM ============ */
 .spectrum {
-  padding: 140px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--nav-clear) 0 clamp(16px, 4vh, 48px);
 }
 .spectrum__caption {
   max-width: 640px;
   color: var(--c-sub-dark);
-  margin-bottom: 64px;
-  font-size: 18px;
+  margin-bottom: clamp(16px, 4vh, 64px);
+  font-size: clamp(12px, 1.8vh, 18px);
+  line-height: 1.5;
 }
 .spectrum-bar {
   position: relative;
   display: flex;
-  height: 160px;
+  height: clamp(90px, 16vh, 160px);
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid rgba(142,154,144,0.25);
@@ -428,58 +437,74 @@ textarea:focus-visible {
 
 /* ============ TECHNOLOGY ============ */
 .technology {
-  padding: 140px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--nav-clear) 0 clamp(16px, 4vh, 48px);
   color: var(--c-text-light);
 }
-.technology .eyebrow { color: var(--c-accent); }
-.technology .section-title { color: var(--c-text-light); }
+.technology .eyebrow { color: var(--c-accent); margin-bottom: clamp(4px, 1vh, 20px); }
+.technology .section-title { color: var(--c-text-light); margin-bottom: clamp(8px, 1.6vh, 48px); }
 .tech__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: clamp(24px, 4vh, 60px);
   align-items: center;
 }
 .tech__art {
   background: rgba(233, 228, 210, 0.5);
   border-radius: 4px;
-  padding: 20px;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
 }
-.tech__art svg { width: 100%; height: auto; }
+.tech__art svg { width: auto; height: clamp(120px, 32vh, 420px); max-width: 100%; }
 .spec-list { display: flex; flex-direction: column; }
 .spec-row {
   display: grid;
   grid-template-columns: 160px 1fr;
   gap: 24px;
-  padding: 18px 0;
+  padding: clamp(4px, 1vh, 14px) 0;
   border-bottom: 1px solid rgba(20,32,27,0.15);
 }
-.spec-row dt { font-size: 12px; color: var(--c-text-light); opacity: 0.7; }
-.spec-row dd { margin: 0; font-size: 18px; color: var(--c-text-light); font-weight: 500; }
+.spec-row dt { font-size: 11px; color: var(--c-text-light); opacity: 0.7; }
+.spec-row dd { margin: 0; font-size: clamp(13px, 2vh, 18px); color: var(--c-text-light); font-weight: 500; }
 
 /* ============ IMPACT ============ */
 .impact {
+  display: flex;
+  flex-direction: column;
   color: var(--c-text-light);
   padding-top: 0;
   position: relative;
 }
 .impact__sunrise {
   width: 100%;
-  height: 200px;
+  height: clamp(90px, 20vh, 200px);
   overflow: hidden;
+  flex: none;
 }
-.impact .container { padding-top: 40px; padding-bottom: 140px; }
+.impact .container {
+  padding-top: clamp(14px, 3vh, 40px);
+  padding-bottom: clamp(16px, 4vh, 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+}
 .impact .eyebrow { color: #b8621a; }
 .impact .section-title { color: var(--c-text-light); }
 .impact__cols {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 48px;
-  margin-top: 40px;
+  gap: clamp(18px, 4vh, 48px);
+  margin-top: clamp(10px, 3vh, 40px);
 }
-.impact__col { display: flex; flex-direction: column; gap: 14px; }
-.impact__num { font-size: 13px; color: var(--c-accent); }
-.impact__col h3 { font-size: 26px; color: var(--c-text-light); }
-.impact__col p { color: var(--c-sub-light); font-size: 16px; }
+.impact__col { display: flex; flex-direction: column; gap: 8px; }
+.impact__num { font-size: 12px; color: var(--c-accent); }
+.impact__col h3 { font-size: clamp(16px, 2.6vh, 26px); color: var(--c-text-light); }
+.impact__col p { color: var(--c-sub-light); font-size: clamp(11px, 1.6vh, 16px); line-height: 1.4; }
 
 /* ============ FOOTER ============ */
 .footer {
@@ -497,11 +522,33 @@ textarea:focus-visible {
 }
 
 /* ============ RESPONSIVE — MOBILE ============ */
+/* Font sizes and vertical spacing above are already fluid (clamp() tied to
+   vh, so every section fits the screen height on its own with no scroll).
+   These breakpoints only handle layout that depends on available WIDTH:
+   switching grids to a single column, the mobile nav menu, etc. */
 @media (max-width: 640px) {
+  :root { --nav-clear: 76px; } /* nav is shorter on mobile (~63px) */
   body { font-size: 16px; }
   .container { padding: 0 20px; }
 
-  .nav__inner { padding: 18px 20px; }
+  /* Narrower width means more text wraps onto extra lines at any given
+     font-size, so mobile needs its own (smaller) clamp ranges rather than
+     reusing the desktop vh-only ones. */
+  .section-title { font-size: clamp(19px, 4.4vh, 28px); margin-bottom: clamp(8px, 1.6vh, 20px); }
+  .pull-quote { font-size: clamp(15px, 3.2vh, 24px); line-height: 1.25; margin-bottom: clamp(8px, 1.6vh, 18px); }
+  .problem__copy { font-size: clamp(11px, 1.5vh, 14px); line-height: 1.35; gap: clamp(5px, 1vh, 10px); margin-bottom: clamp(8px, 1.6vh, 20px); }
+  .stat-value { font-size: clamp(13px, 2.6vh, 22px); }
+  .stat-caption { font-size: 8px; }
+  /* The icon is decorative; dropping it on mobile buys back real vertical
+     room across 4 stacked steps. */
+  .step__icon { display: none; }
+  .step__desc { font-size: clamp(10px, 1.4vh, 12px); line-height: 1.3; }
+  .step__title { font-size: clamp(13px, 2.2vh, 18px); }
+  .spectrum__caption { font-size: clamp(11px, 1.5vh, 14px); margin-bottom: clamp(8px, 1.8vh, 20px); }
+  .impact__col p { font-size: clamp(10px, 1.4vh, 13px); }
+  .impact__col h3 { font-size: clamp(14px, 2.2vh, 20px); }
+
+  .nav__inner { padding: 14px 20px; }
   .nav__links {
     position: absolute;
     top: 100%; left: 0; right: 0;
@@ -520,43 +567,41 @@ textarea:focus-visible {
   .nav__toggle { display: flex; }
   .badge { display: none; }
 
-  .hero { padding-top: 100px; }
   .hero__content { padding: 0 20px; }
-  .hero__title { font-size: 44px; }
-  .hero__sub { font-size: 17px; }
   .hero__actions { flex-direction: column; align-items: stretch; }
-  .hero__scene { height: 220px; }
-  .hero__credit { font-size: 10px; padding: 0 20px 24px; }
 
-  .problem, .how, .spectrum, .technology { padding: 90px 0; }
-  .pull-quote { font-size: 32px; margin-bottom: 36px; }
-  .section-title { font-size: 32px; margin-bottom: 32px; }
-  .problem__copy { margin-bottom: 48px; }
-  .stat-row { grid-template-columns: 1fr; gap: 28px; }
+  /* Stay 3-across even on mobile — stacking triples the row's height, and
+     these values are short placeholders, so 3 narrow columns still work. */
+  .stat-row { gap: clamp(8px, 1.6vh, 16px) 10px; }
 
-  .timeline { grid-template-columns: 1fr; gap: 0; }
+  .timeline { grid-template-columns: 1fr; gap: clamp(6px, 1.2vh, 14px); padding-top: clamp(8px, 1.5vh, 20px); }
   .timeline__line { display: none; }
   .step {
-    padding: 32px 0 32px 28px;
+    padding: clamp(6px, 1.2vh, 14px) 0 clamp(6px, 1.2vh, 14px) 20px;
     border-left: 1px solid rgba(242,140,40,0.35);
   }
-  .step__dot { top: 32px; left: -8px; }
-  .step__num { margin-bottom: 14px; }
+  .step__dot { top: clamp(6px, 1.2vh, 14px); left: -8px; }
+  .step__icon { margin-bottom: clamp(4px, 1vh, 10px); }
+  .step__num { margin-bottom: clamp(4px, 1vh, 10px); }
 
   .spectrum-bar { flex-direction: column; height: auto; }
-  .spectrum-zone { padding: 24px 16px; }
+  .spectrum-zone { padding: clamp(8px, 1.6vh, 18px) 16px; }
   .spectrum-zone--human { flex: none; }
   .spectrum-wave { display: none; }
 
-  .tech__grid { grid-template-columns: 1fr; gap: 40px; }
+  .tech__grid { grid-template-columns: 1fr; gap: clamp(12px, 2.5vh, 30px); }
+  .tech__art svg { height: clamp(70px, 18vh, 300px); }
   .spec-row { grid-template-columns: 110px 1fr; gap: 14px; }
 
-  .impact__cols { grid-template-columns: 1fr; gap: 36px; }
+  .impact__cols { grid-template-columns: 1fr; gap: clamp(10px, 2vh, 24px); }
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
-  .hero__title { font-size: 72px; }
-  .tech__grid { grid-template-columns: 1fr; }
+  /* Art stacks above specs here, so their heights add together instead of
+     sharing a row — needs a smaller share of the vh budget than the
+     side-by-side desktop layout. */
+  .tech__grid { grid-template-columns: 1fr; gap: clamp(10px, 2vh, 30px); }
+  .tech__art svg { height: clamp(80px, 16vh, 300px); }
 }
 
 /* ============ SCROLL MASCOT ============ */

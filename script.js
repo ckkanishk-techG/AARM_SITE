@@ -49,21 +49,13 @@ if (document.fonts && document.fonts.ready) {
 updateDuskToDawnGradient();
 
 // Turn vertical wheel/trackpad input into horizontal scrolling, since the
-// page's own scroll axis is now sideways (mice and trackpads report
-// vertical intent far more often than horizontal). But if the panel under
-// the cursor has its own vertical overflow (some content is taller than
-// the screen) and hasn't reached the end of it yet, let it scroll normally
-// first — otherwise that content is simply unreachable with a mouse wheel.
+// page's own scroll axis is sideways (mice and trackpads report vertical
+// intent far more often than horizontal). Every section is sized to fit
+// the screen height on its own (fluid, vh-based typography and spacing),
+// so there is no vertical scroll to chain to — all wheel input maps to
+// horizontal movement.
 window.addEventListener('wheel', (e) => {
   if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return; // already horizontal input
-  const panel = e.target.closest('.section');
-  if (panel) {
-    const atBottom = panel.scrollTop >= panel.scrollHeight - panel.clientHeight - 1;
-    const atTop = panel.scrollTop <= 0;
-    if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) {
-      return; // let the panel's own vertical scroll handle this tick
-    }
-  }
   e.preventDefault();
   window.scrollBy({ left: e.deltaY, behavior: 'auto' });
 }, { passive: false });
