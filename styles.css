@@ -506,21 +506,6 @@ textarea:focus-visible {
 .impact__col h3 { font-size: clamp(16px, 2.6vh, 26px); color: var(--c-text-light); }
 .impact__col p { color: var(--c-sub-light); font-size: clamp(11px, 1.6vh, 16px); line-height: 1.4; }
 
-/* ============ FOOTER ============ */
-.footer {
-  border-left: 1px solid rgba(20,32,27,0.12);
-  color: var(--c-sub-light);
-  display: flex;
-  align-items: safe center;
-  justify-content: safe center;
-}
-.footer__inner {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 11px;
-}
-
 /* ============ RESPONSIVE — MOBILE ============ */
 /* Font sizes and vertical spacing above are already fluid (clamp() tied to
    vh, so every section fits the screen height on its own with no scroll).

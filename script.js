@@ -15,7 +15,6 @@ function updateDuskToDawnGradient() {
     ['technology', '--c-transition', 'mid'],
     ['impact', '--c-sunrise-glow', 'leading'],
     ['impact', '--c-dawn-1', 'mid'],
-    ['footer', '--c-dawn-2', 'mid'],
   ];
   const rootStyles = getComputedStyle(document.documentElement);
   const totalWidth = document.documentElement.scrollWidth;
